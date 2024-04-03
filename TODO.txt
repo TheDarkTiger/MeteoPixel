@@ -1,0 +1,7 @@
+HIGH	Allow to pass a file project as argument
+HIGH	Use PySoX
+
+Med	Add options on the project file (#option, or maybe json?)
+Med	Add export format option
+
+low	Support other TTS services

@@ -1,0 +1,3 @@
+# pip install -r requirements.txt
+# espeak need to be callable
+# sox need to be callable
