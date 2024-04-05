@@ -3,7 +3,7 @@ Dirty as hay, learn python with this file at your own risks.
 TheDarkTiger 2024
 
 
-## The scrip
+## The script
 Generates an audio fake weather forecast / bulletin from a text file.
 
 ## How to use install?
