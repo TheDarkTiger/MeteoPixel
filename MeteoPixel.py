@@ -67,14 +67,17 @@ def normalize_sound( fileIn, fileOut, volume=1 ):
 # Simple text file for now, will probably change in the future
 def bulletin_load( fileName ):
 	
-	lines = []
+	bulletin = {}
+	bulletin["project"] = {"file":fileName, "folder":os.path.dirname(fileName)}
+	bulletin["lines"] = []
+	
 	if os.path.exists( fileName ) :
 		with open( fileName, "r" ) as file :
-			lines = file.readlines()
+			bulletin["lines"] = file.readlines()
 	else :
 		error( "File {fileName} don't exist" )
 	
-	return lines
+	return bulletin
 
 
 #----------------------------------------------------------------------
@@ -89,10 +92,15 @@ def bulletin_generate( bulletin, path ):
 	# Generate speech when needed
 	index = 0
 	fileList = []
-	for line in bulletin:
+	for line in bulletin["lines"]:
 		line = line.strip()
 		if (line[0]=='[') and (line[-1]==']'):
 			rawFile = line[1:-1]
+			
+			# If filepath is not absolute, make it so
+			if rawFile != os.path.abspath( rawFile ) :
+				rawFile = os.path.abspath( bulletin["project"]["folder"] + "\\" + rawFile )
+			
 			volume = 1
 			
 		else:
