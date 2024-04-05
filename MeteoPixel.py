@@ -6,6 +6,7 @@
 
 import os
 import subprocess
+import argparse
 
 
 #==============================================================================
@@ -127,14 +128,25 @@ def bulletin_generate( bulletin, path ):
 	
 	return 0
 
+#----------------------------------------------------------------------
+# Gather arguments
+def Args():
+	parser = argparse.ArgumentParser()
+	parser.add_argument( '-i', '--project', required=False, default="bulletin.txt", dest='inputBulletin', help="Project to distribute" )
+	
+	return parser.parse_args()
 
 #=============================================================================
 # Main
 
 if __name__ == "__main__" :
 	
-	fileName = "bulletin.txt"
+	args = Args()
 	
-	bulletin = bulletin_load( fileName )
+	# Check some parameters
+	if not os.path.exists( args.inputBulletin ) :
+		error( f"Input file {args.inputBulletin} don't exists" )
+	
+	bulletin = bulletin_load( args.inputBulletin )
 	bulletin_generate( bulletin, "generated" )
 	
